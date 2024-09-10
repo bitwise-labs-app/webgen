@@ -67,38 +67,40 @@ const render = (courseDir, outputDir, siteId = null) => {
         throw new Error("Missing index file!");
     }
 
-    manifest.extraCourseInternalPages.forEach(pagePath => {
-        // Get the front matter name
-        const c = new showdown.Converter({ metadata: true });
-        c.makeHtml(
-            fs.readFileSync(
-                path.join(courseDir, pagePath),
-                "utf-8"
-            ).toString()
-        );
-        const m = c.getMetadata();
-
-        let newURL;
-
-        if (m.name) {
-            newURL = "/course/" + m.name.replace(/[^a-zA-Z]/g, "").toLowerCase();
-            if (URLs[newURL + ".html"]) {
-                throw new Error(`Internal clashing page ${pagePath}`);
+    if (manifest.extraCourseInternalPages) {
+        manifest.extraCourseInternalPages.forEach(pagePath => {
+            // Get the front matter name
+            const c = new showdown.Converter({ metadata: true });
+            c.makeHtml(
+                fs.readFileSync(
+                    path.join(courseDir, pagePath),
+                    "utf-8"
+                ).toString()
+            );
+            const m = c.getMetadata();
+    
+            let newURL;
+    
+            if (m.name) {
+                newURL = "/course/" + m.name.replace(/[^a-zA-Z]/g, "").toLowerCase();
+                if (URLs[newURL + ".html"]) {
+                    throw new Error(`Internal clashing page ${pagePath}`);
+                }
+    
+                newURL += ".html";
+     
+                URLs[newURL] = pagePath;
+            } else {
+                throw new Error(`Missing name front matter in internal page ${pagePath}`);
             }
-
-            newURL += ".html";
- 
-            URLs[newURL] = pagePath;
-        } else {
-            throw new Error(`Missing name front matter in internal page ${pagePath}`);
-        }
-
-        links.push({
-            type: "link",
-            name: m.name,
-            url: newURL
+    
+            links.push({
+                type: "link",
+                name: m.name,
+                url: newURL
+            });
         });
-    });
+    }
 
     // Do the same for the lessons
     manifest.content.forEach(chapter => {
@@ -141,10 +143,10 @@ const render = (courseDir, outputDir, siteId = null) => {
     });
 
     // Start rendering
-    const bodyAppend = fs.readFileSync(
+    const bodyAppend = manifest.appendToBody ? fs.readFileSync(
         path.join(courseDir, manifest.appendToBody),
         "utf-8"
-    ).toString();
+    ).toString() : "";
 
     // copy static files
     fs.cpSync(
@@ -178,18 +180,20 @@ const render = (courseDir, outputDir, siteId = null) => {
     console.log("[render] rendered 404.html");
 
     // Internal pages
-    manifest.extraCourseInternalPages.forEach(pagePath => {
-        renderToFile(
-            path.join(outputDir, Object.entries(URLs).find(([key, value]) => value === pagePath)?.[0]),
-            path.join(courseDir, pagePath),
-            links,
-            siteId,
-            bodyAppend,
-            manifest,
-            0, 0, "internal"
-        );
-        console.log(`[render] rendered ${pagePath}`);
-    });
+    if (manifest.extraCourseInternalPages) {
+        manifest.extraCourseInternalPages.forEach(pagePath => {
+            renderToFile(
+                path.join(outputDir, Object.entries(URLs).find(([key, value]) => value === pagePath)?.[0]),
+                path.join(courseDir, pagePath),
+                links,
+                siteId,
+                bodyAppend,
+                manifest,
+                0, 0, "internal"
+            );
+            console.log(`[render] rendered ${pagePath}`);
+        });
+    }
 
     // Lessons
     for (var i = 0; i < manifest.content.length; i++) {
