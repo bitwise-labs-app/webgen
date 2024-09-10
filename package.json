@@ -1,12 +1,16 @@
 {
   "name": "webgen",
   "version": "1.0.0",
-  "description": "Generates static pages from course content ",
+  "description": "Generates static pages from course content",
   "main": "src/main.js",
-  "scripts": {
-    "generate": "node ."
-  },
   "author": "infinity-atom",
-  "contributors": [ "infinity-atom", "novafurry" ],
-  "license": "MIT"
+  "contributors": [
+    "infinity-atom",
+    "novafurry"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "nunjucks": "^3.2.4",
+    "showdown": "^2.1.0"
+  }
 }

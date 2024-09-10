@@ -1,0 +1,186 @@
+:root {
+    --background: #111;
+    --background2: #222;
+    --background3: #333;
+    --foreground: #ddd;
+    --foreground2: #888;
+
+    --danger-background: #db4747;
+    --danger-foreground: #fff;
+}
+
+body.lightmode {
+    --background: #eee;
+    --background2: #ddd;
+    --background3: #ccc;
+    --foreground: #333;
+    --foreground2: #888;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+
+    background-color: var(--background);
+}
+
+.javascript-warning {
+    background-color: var(--danger-background);
+    color: var(--danger-foreground);
+
+    font-size: 14pt;
+    padding: 5px;
+    text-align: center;
+}
+
+.header {
+    background-color: var(--background2);
+    color: var(--foreground);
+
+    display: flex;
+    height: 50px;
+    padding: 5px;
+
+    align-items: center;
+
+    font-size: 14pt;
+
+    border-bottom: 1px solid var(--foreground2);
+
+    z-index: 10;
+}
+
+.header-course-title {
+    font-family: "Ubuntu";
+}
+
+.header-menu {
+    margin-right: 5px;
+    padding: 5px;
+
+    background-color: var(--background2);
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.header-mode-toggle {
+    margin-right: 5px;
+    padding: 5px;
+
+    background-color: var(--background2);
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.header-mode-toggle:hover {
+    background-color: var(--background3);
+}
+
+.header-mode-toggle a {
+    color: var(--foreground);
+    font-size: 14pt;
+
+    text-decoration: none;
+}
+
+.header-spacer {
+    margin-left: auto;
+}
+
+.header-menu:hover {
+    background-color: var(--background3);
+}
+
+.header-menu a {
+    color: var(--foreground);
+    font-size: 14pt;
+
+    text-decoration: none;
+}
+
+.sidebar {
+    width: 75vw;
+    height: calc(100vh - 50px);
+
+    position: absolute;
+    top: 50px;
+    left: 0;
+
+    background-color: var(--background2);
+    color: var(--foreground);
+
+    z-index: 9;
+
+    transform: translateX(-150%);
+    transition: 500ms ease-in-out transform;
+
+    overflow-y: auto;
+}
+
+.sidebar[data-visible="true"] {
+    transform: translateX(0);
+}
+
+.lesson-content {
+    width: 100vw;
+    height: calc(100vh - 50px);
+
+    position: absolute;
+    top: 50px;
+    left: 0px;
+
+    padding: 15px;
+    color: var(--foreground);
+
+    overflow: auto;
+}
+
+@media screen and (min-width: 600px) {
+    .sidebar {
+        transform: translateX(0);
+        width: 300px;
+        border-right: 1px solid var(--foreground2);
+    }
+
+    .header-menu {
+        display: none;
+    }
+
+    .header-course-title {
+        margin-left: 5px;
+    }
+
+    .lesson-content {
+        left: 300px;
+        width: calc(100vw - 300px);
+    }
+}
+
+.sidebar-header {
+    font-size: 16pt;
+    font-weight: bold;
+
+    font-family: "Ubuntu";
+    padding: 5px;
+}
+
+.sidebar-item {
+    font-size: 12pt;
+    padding: 5px;
+
+    cursor: pointer;
+    display: block;
+    color: var(--foreground);
+
+    text-decoration: none;
+}
+
+.sidebar-item:hover {
+    background-color: var(--background);
+}
