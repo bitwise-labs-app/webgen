@@ -1,4 +1,4 @@
-# bitwize-app/webgen
+# bitwise-labs-app/webgen
 Usage: `render(courseDir, outputDir, siteId)`
 |courseDir|outputDir|siteId|
 |-|-|-|
