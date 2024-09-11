@@ -56,6 +56,16 @@
         <div id="lesson-body">
             {{ lessonContent | safe }}
         </div>
+        <hr>
+        {% if prev %}
+            <a href="{{ prev.url }}">&lt; {{ prev.name }}</a>
+        {% endif %}
+        {% if prev and next %}
+            |
+        {% endif %}
+        {% if next %}
+            <a href="{{ next.url }}">{{ next.name }} &gt;</a>
+        {% endif %}
     </div>
 
     <script src="/static/js/sidebar.js"></script>
