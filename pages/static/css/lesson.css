@@ -15,7 +15,7 @@
     font-size: 11pt;
 }
 
-.lesson-content info {
+.lesson-content div.info {
     display: block;
     margin: 10px 0;
 
@@ -25,7 +25,7 @@
     border-left: 5px solid rgb(0, 129, 189);
 }
 
-.lesson-content info::before {
+.lesson-content div.info::before {
     content: attr(data-header);
     display: block;
     text-transform: uppercase;
@@ -36,7 +36,7 @@
     color: rgb(0, 129, 189);
 }
 
-.lesson-content warning {
+.lesson-content div.warning {
     display: block;
     margin: 10px 0;
 
@@ -46,7 +46,7 @@
     border-left: 5px solid rgb(218, 188, 20);
 }
 
-.lesson-content warning::before {
+.lesson-content div.warning::before {
     content: attr(data-header);
     display: block;
     text-transform: uppercase;
@@ -57,7 +57,7 @@
     color: rgb(218, 188, 20);
 }
 
-.lesson-content danger {
+.lesson-content div.danger {
     display: block;
     margin: 10px 0;
 
@@ -67,7 +67,7 @@
     border-left: 5px solid rgb(255, 61, 54);
 }
 
-.lesson-content danger::before {
+.lesson-content div.danger::before {
     content: attr(data-header);
     display: block;
     text-transform: uppercase;
