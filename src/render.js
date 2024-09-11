@@ -8,7 +8,7 @@ const fs = require("fs");
 const renderToFile = (path, file, links = [], siteId, bodyAppend, manifest, chapterNumber = 0, lessonNumber = 0, type = null) => {
     const markdown = fs.readFileSync(file, "utf-8").toString();
 
-    const c = new showdown.Converter({ metadata: true, openLinksInNewWindow: true });
+    const c = new showdown.Converter({ metadata: true, openLinksInNewWindow: true, tables: true });
     const html = c.makeHtml(markdown);
     const meta = c.getMetadata();
 
