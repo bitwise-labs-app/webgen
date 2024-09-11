@@ -1,5 +1,6 @@
 const nunjucks = require("nunjucks");
 const showdown = require("showdown");
+const terser = require("html-minifier-terser");
 
 const nodepath = require("path");
 
@@ -57,10 +58,12 @@ const renderToFile = (path, file, links = [], siteId, bodyAppend, manifest, chap
     );
 
     // Save
-    fs.writeFileSync(
-        path,
-        njOutput
-    );
+    (async () => {
+        fs.writeFileSync(
+            path,
+            await terser.minify(njOutput, { continueOnParseError: true })
+        );
+    })();
 }
 
 module.exports = { renderToFile };
