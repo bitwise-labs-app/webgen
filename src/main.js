@@ -212,4 +212,6 @@ const render = (courseDir, outputDir, siteId = null) => {
     }
 }
 
+render("/home/infinity/Coding/idkhow/python", "/home/infinity/Coding/idkhow/python/out");
+
 module.exports = { render };
