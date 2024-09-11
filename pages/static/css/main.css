@@ -188,11 +188,11 @@ body {
 span.bitwize-pill {
     font-size: 12pt;
     padding: 3px 10px;
-    background-color: var(--danger-background);
+    background-color: #006b97;
     border-radius: 1000px;
 }
 
 span.bitwize-pill a {
-    color: var(--danger-foreground);
+    color: #fff;
     text-decoration: none;
 }
