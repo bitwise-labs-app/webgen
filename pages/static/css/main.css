@@ -184,3 +184,15 @@ body {
 .sidebar-item:hover {
     background-color: var(--background);
 }
+
+span.bitwize-pill {
+    font-size: 12pt;
+    padding: 3px 10px;
+    background-color: var(--danger-background);
+    border-radius: 1000px;
+}
+
+span.bitwize-pill a {
+    color: var(--danger-foreground);
+    text-decoration: none;
+}
