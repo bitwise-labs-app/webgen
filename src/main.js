@@ -23,11 +23,11 @@ const render = (courseDir, outputDir, siteId = null) => {
         console.log("Need to clear output directory...");
         fs.rmSync(outputDir, { recursive: true });
         fs.mkdirSync(outputDir);
+    }
 
-        // Create course and lesson directories
-        fs.mkdirSync(path.join(outputDir, "course"));
-        fs.mkdirSync(path.join(outputDir, "lesson"));
-    } 
+    // Create course and lesson directories
+    fs.mkdirSync(path.join(outputDir, "course"));
+    fs.mkdirSync(path.join(outputDir, "lesson"));
     
     // Parse manifest
     const manifest = JSON.parse(
