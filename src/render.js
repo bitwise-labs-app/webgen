@@ -34,7 +34,7 @@ const renderToFile = (path, file, links = [], siteId, bodyAppend, manifest, chap
     }
 
     if (type == "index") {
-        parsedName = `Welcome to the ${manifest.courseName} course!`
+        parsedName = manifest.indexCustomTitle ?? `Welcome to the ${manifest.courseName} course!`;
     } else if (type == "404") {
         parsedName = "404 Not Found";
     } else if (type == "internal") {

@@ -1,6 +1,6 @@
 if (localStorage.lightmode) {
-    if (localStorage.lightmode == "true") {
-        document.body.classList.add("lightmode");
+    if (localStorage.lightmode == "false") {
+        document.body.setAttribute("data-bs-theme", "dark");
     }
 } else {
     if (window.matchMedia) {
@@ -9,12 +9,12 @@ if (localStorage.lightmode) {
         localStorage.lightmode = "false";
     }
 
-    if (localStorage.lightmode == "true") {
-        document.body.classList.add("lightmode");
+    if (localStorage.lightmode == "false") {
+        document.body.setAttribute("data-bs-theme", "dark");
     }
 }
 
-document.querySelector(".header-mode-toggle").addEventListener("click", () => {
-    document.body.classList.toggle("lightmode");
-    localStorage.lightmode = document.body.classList.contains("lightmode") ? "true" : "false";
+document.querySelector("#toggle-mode-button").addEventListener("click", () => {
+    document.body.setAttribute("data-bs-theme", document.body.getAttribute("data-bs-theme") == "dark" ? "" : "dark");
+    localStorage.lightmode = document.body.getAttribute("data-bs-theme") != "dark" ? "true" : "false";
 });
