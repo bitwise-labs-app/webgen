@@ -70,6 +70,13 @@
         </div>
     </div>
 
+    <noscript>
+        <div class="container-fluid bg-danger text-light p-2">
+            <i class="bi bi-exclamation-circle-fill"></i>
+            This site has limited functionality while JavaScript is disabled.
+        </div>
+    </noscript>
+
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom sticky-top">
         <div class="container-fluid">
             <span class="navbar-brand" id="nvb5">{{ meta.courseName }} <span class="badge bg-secondary">Bitwise Labs</span></span>
@@ -92,17 +99,19 @@
                     </li>
                 </ul>
 
-                <button class="btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                    <i class="bi bi-arrow-left-circle-fill"></i> Sidebar
-                </button>
-                &nbsp;
-                <button class="btn btn-primary" id="toggle-mode-button">
-                    <i class="bi bi-circle-half"></i> Appearance
-                </button>
-                &nbsp;
-                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#aboutModal">
-                    <i class="bi bi-info-circle"></i> About
-                </button>
+                <div class="js-required">
+                    <button class="btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                        <i class="bi bi-arrow-left-circle-fill"></i> Sidebar
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-primary" id="toggle-mode-button">
+                        <i class="bi bi-circle-half"></i> Appearance
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                        <i class="bi bi-info-circle"></i> About
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -122,7 +131,8 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-2">
+            {% if not manifest.noAds %}
+            <div class="col-md-2 js-required">
                 <div class="card">
                     <div class="card-header d-flex justify-content-end">
                         <button type="button" class="btn-close text-reset" onclick="this.parentElement.parentElement.remove()"></button>
@@ -133,9 +143,12 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 
+    <style>.js-required { visibility: collapse; }</style>
+    <script>document.querySelectorAll(".js-required").forEach((e) => e.classList.remove("js-required"));</script>
     <script src="/static/js/mode.js"></script>
 
     {{ appendToBody | safe }}

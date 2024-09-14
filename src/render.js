@@ -1,6 +1,6 @@
 const nunjucks = require("nunjucks");
 const showdown = require("showdown");
-const terser = require("html-minifier-terser");
+const minify = require("html-minifier").minify;
 
 const nodepath = require("path");
 
@@ -53,17 +53,27 @@ const renderToFile = (path, file, links = [], siteId, bodyAppend, manifest, chap
             siteId,
             lessonContent: html,
             appendToBody: bodyAppend,
-            prev, next
+            prev, next,
+            manifest
         }
     );
 
     // Save
-    (async () => {
-        fs.writeFileSync(
-            path,
-            await terser.minify(njOutput, { continueOnParseError: true })
-        );
-    })();
+    fs.writeFileSync(
+        path,
+        minify(njOutput, {
+            collapseBooleanAttributes: true,
+            continueOnParseError: true,
+            minifyCSS: true,
+            minifyJS: true,
+            minifyURLs: true,
+            quoteCharacter: `"`,
+            removeComments: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true,
+            removeEmptyAttributes: true
+        })
+    );
 }
 
 module.exports = { renderToFile };
