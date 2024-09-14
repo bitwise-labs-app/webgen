@@ -19,6 +19,10 @@
     <!-- Umami stats -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ siteId }}"></script>
     {% endif %}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ parsedName }}">
+    <meta property="og:description" content="{{ meta.courseName }} on Bitwise Labs">
 </head>
 <body>
     <div class="modal fade" id="aboutModal">
