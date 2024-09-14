@@ -19,6 +19,10 @@
     <!-- Umami stats -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ siteId }}"></script>
     {% endif %}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ parsedName }}">
+    <meta property="og:description" content="{{ meta.courseName }} on Bitwise Labs">
 </head>
 <body>
     <div class="modal fade" id="aboutModal">
@@ -32,7 +36,7 @@
                         This course was created for Bitwise Labs in an attempt to create a free and open source learning platform.
                     </p>
                     <div class="alert alert-primary">
-                        This course's source is available at <a href="https://github.com/bitwiselabs-app" class="alert-link">https://github.com/bitwiselabs-app</a>.
+                        This course's source is available at <a href="https://github.com/bitwise-labs-app" class="alert-link">https://github.com/bitwise-labs-app</a>.
                     </div>
                     <p>
                         The authors of this course:
@@ -100,16 +104,16 @@
                 </ul>
 
                 <div class="js-required">
-                    <button class="btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                        <i class="bi bi-arrow-left-circle-fill"></i> Sidebar
+                    <button class="btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-label="Open lessons list">
+                        <i class="bi bi-list-columns-reverse"></i>
                     </button>
                     &nbsp;
-                    <button class="btn btn-primary" id="toggle-mode-button">
-                        <i class="bi bi-circle-half"></i> Appearance
+                    <button class="btn btn-primary" id="toggle-mode-button" aria-label="Change appearance mode">
+                        <i class="bi bi-circle-half"></i>
                     </button>
                     &nbsp;
-                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#aboutModal">
-                        <i class="bi bi-info-circle"></i> About
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#aboutModal" aria-label="Read more about this course">
+                        <i class="bi bi-info-circle"></i>
                     </button>
                 </div>
             </div>
@@ -120,8 +124,10 @@
         <div class="row">
             <div class="col-md-10">
                 <h1 class="display-5">{{ parsedName }}</h1>
-                {{ lessonContent | safe }}
-                <div class="border-top pt-3 mt-3 d-flex">
+                <div id="lessonContent">
+                    {{ lessonContent | safe }}
+                </div>
+                <div class="border-top pt-3 mt-3 mb-3 d-flex">
                     {% if prev %}
                     <a href="{{ prev.url }}" class="btn btn-primary"><i class="bi bi-arrow-left-circle-fill"></i> {{ prev.name }}</a>
                     {% endif %}
@@ -147,6 +153,7 @@
         </div>
     </div>
 
+    <style>#lessonContent * { max-width: 100% };</style>
     <style>.js-required { visibility: collapse; }</style>
     <script>document.querySelectorAll(".js-required").forEach((e) => e.classList.remove("js-required"));</script>
     <script src="/static/js/mode.js"></script>
