@@ -10,6 +10,7 @@ const renderToFile = (path, file, links = [], siteId, bodyAppend, manifest, chap
     const markdown = fs.readFileSync(file, "utf-8").toString();
 
     const c = new showdown.Converter({ metadata: true, openLinksInNewWindow: true });
+    c.setOption('tables', true);
     const html = c.makeHtml(markdown);
     const meta = c.getMetadata();
 
